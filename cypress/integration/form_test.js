@@ -2,13 +2,13 @@
 describe('User App', () => {
     //fresh state!
     beforeEach(() => {
-        cy.visit('http://localhost:3000');
+        cy.visit('http://localhost:3000/pizza');
 })
 
 
     // Helpers to centralize selectors
     const nameInput = () => cy.get('input[name=name]');
-    const sizeInput = () => cy.get('input[name=size]');
+    const sizeInput = () => cy.get('select[name=size]');
     const topping1Input = () => cy.get('input[name=topping1]');
     const topping2Input = () => cy.get('input[name=topping2]');
     const topping3Input = () => cy.get('input[name=topping3]');
@@ -17,16 +17,44 @@ describe('User App', () => {
     const submitButton = () => cy.get('button');
 
 
-    it('sanity check for some math', () => {
-        // "it" is a test
-        // "expect" is an assertion
-        // There can be multiple (and often will be) assertions per test
-        // but...they must all relate to the "one thing" we're testing!
-        expect(1 + 2).to.equal(3);
-        expect(2 + 2).not.to.equal(5);
-        expect({}).not.to.equal({}); // === strict equality
-        expect({}).to.eql({}); // == not strict equality
+
+
+    // test that you can add text to the box
+    it('can type in the boxes', () => {
+        nameInput()
+            .should('have.value', '')
+            .type('Jon')
+            .should('have.value', 'Jon');
+        specialInput()
+            .should('have.value', '')
+            .type('extra cheese please!')
+            .should('have.value', 'extra cheese please!');
+        })
+    // test that you can select multiple toppings
+    it('can user check multiple boxes?', () => {
+        topping1Input().type('be.checked');
+        topping1Input().type('be.unchecked');
+        topping1Input().type('be.checked');
+        topping2Input().type('be.checked');
+        topping2Input().type('be.unchecked');
+        topping2Input().type('be.checked');
+        topping3Input().type('be.checked');
+        topping3Input().type('be.unchecked');
+        topping3Input().type('be.checked');
+        topping4Input().type('be.checked');
+        topping4Input().type('be.unchecked');
+        topping4Input().type('be.checked');
     })
 
+    // test that you can submit the form
+    it('can see if a user can actually order the pizza', () => {
+        nameInput().type('Jon');
+        specialInput().type('extra cheese please!');
+        topping1Input().type('be.checked');
+        topping3Input().type('be.checked');
+        sizeInput().select('small')
+        submitButton().should('not.be.disabled');
+        submitButton().click();
+    })
 
 })

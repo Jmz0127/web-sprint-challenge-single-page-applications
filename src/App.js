@@ -6,9 +6,9 @@ const App = () => {
     <div className ='App'> 
       <header>
         <h1>Lambda Eats</h1>
-        <nav id='order-pizza'>
+        <nav>
           <Link to='/'>Home</Link>
-          <Link to='/pizza'>Order Form</Link>
+          <Link id='order-pizza'to='/pizza'>Order Form</Link>
           <Link to='/completion'>Completion</Link>
         </nav>
       </header>

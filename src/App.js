@@ -1,7 +1,8 @@
-import React from "react";
+import { useState } from "react";
 import { Link, Switch, Route } from 'react-router-dom';
 import './App.css' //only did this so the links are more legible and look a little better - personal stretch
 import Completion from './components/Completion'; //personal stretch - want to see a completion message post-ordering
+import Order from './components/Order';
 import formSchema from './validation/formSchema';
 
 //initial form values
@@ -15,7 +16,7 @@ const initialOrderForm={
   special: '' //SHOULD BE TEXT FIELD
 }
 
-//how to deal with errors
+//initial errors - all string values to begin with
 const initialOrderFormErrors={ 
   name:'', //SHOULD BE TEXT FIELD
   size:'', //SHOULD BE DROPDOWN
@@ -28,6 +29,18 @@ const initialOrderFormErrors={
 
 
 const App = () => {
+
+  //dealing with state slices
+  const [pizza, setPizza] =  useState({})
+  const [formValues, setFormValues] = useState(initialOrderForm)
+  const [formErrors, setFormErrors] = useState(initialOrderFormErrors)
+  const [disabled, setDisabled] = useState(true)
+
+
+  
+
+
+
   return (
     <div className ='App'> 
       <header>
@@ -44,10 +57,10 @@ const App = () => {
             <div>home</div>
           </Route>
           <Route path='/completion'>
-            <Completion />
+            <Completion pizza={pizza}/>
           </Route>
           <Route path='/pizza'>
-            <div>order</div>
+            <Order />
           </Route>
         </Switch>
       </main>

@@ -9,4 +9,4 @@ const Completion = (props) => {
     )
 }
 
-export default Completion
+export default Completion;

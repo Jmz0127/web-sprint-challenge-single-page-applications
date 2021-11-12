@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Switch, Route } from 'react-router-dom';
 import './App.css' //only did this so the links are more legible and look a little better - personal stretch
 import Completion from './components/Completion'; //personal stretch - want to see a completion message post-ordering
 import Order from './components/Order';
 import formSchema from './validation/formSchema';
+import * as yup from 'yup';
 
 //initial form values
 const initialOrderForm={ 
@@ -36,9 +37,32 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialOrderFormErrors)
   const [disabled, setDisabled] = useState(true)
 
+  const validate = (name, value) => {
+    yup.reach(formSchema, name) //validating the name rules from our formSchema file
+      .validate(value)
+      .then(() => {
+        setFormErrors({...formErrors, [name]:''})
+      })
+      .catch((error) => {
+        
+        setFormErrors({...formErrors, [name]: error.errors[0]})
+      })
+  }
 
-  
+  const inputChange = (name, value) => {
+    validate(name, value)
+    console.log(name, value)
+    setFormValues({
+      ...formValues, 
+      [name]: value
+    })
+  }
 
+  //looks to disable button every time formValues change
+  useEffect(() => {
+    formSchema.isValid(formValues)
+      .then((valid) => setDisabled(!valid))
+  }, [formValues])
 
 
   return (
@@ -60,7 +84,12 @@ const App = () => {
             <Completion pizza={pizza}/>
           </Route>
           <Route path='/pizza'>
-            <Order />
+            <Order 
+            inputChange = {inputChange}
+            formValues = {formValues}
+            formErrors = {formErrors}
+            disabled = {disabled}
+            />
           </Route>
         </Switch>
       </main>

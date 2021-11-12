@@ -2,6 +2,12 @@ a{
   display:block;
 }
 
+form{
+  display:flex;
+  flex-direction: column;
+
+}
+
 .App {
   text-align: center;
 }

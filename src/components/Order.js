@@ -7,10 +7,10 @@ const Order = (props) => {
         <div>
             order form for your pizza
             <form id='pizza-form'>
-                <label>
+                <label id='name-input'>
                     name: 
                 </label>
-                <label>
+                <label id='size-dropdown'>
                     size:
                 </label>
                 <label>
@@ -19,7 +19,7 @@ const Order = (props) => {
                     topping3:
                     topping4:
                 </label>
-                <label>
+                <label id='special-text'>
                     special: 
                 </label>
             </form>

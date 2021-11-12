@@ -47,6 +47,7 @@ const App = () => {
       })
   }
 
+  //VALIDATE WITH YUP 🤖
   const validate = (name, value) => {
     yup.reach(formSchema, name) //validating the name rules from our formSchema file
       .validate(value)
@@ -57,7 +58,8 @@ const App = () => {
         setFormErrors({...formErrors, [name]: error.errors[0]})
       })
   }
-
+  
+  // RUN VALIDATION WITH YUP
   const inputChange = (name, value) => {
     validate(name, value)
     setFormValues({

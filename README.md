@@ -35,8 +35,16 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
 1. In 1-2 sentences, explain what React's `useRouteMatch` hook is used for.
+
+    - useRouteMatch is a way to cut down your code by enabling dynamic pathing in your url. For example, instead of having a url path in your code for every single user (like user-details1,2,3,4,5,6 etc), you could useRouteMatch to create a single line of code that uses `${url}/user-details`. This is a good way to implement DRY code (don't repeat yourself).
+
 1. How would you explain form validation to someone who has never programmed before?
+
+    - I'd probably give an example - "You know when you reset your password on your Chase app, and how it promps you to use a password longer than 8 characters if you only put in 8 characters, or when you only have letters in your password but a promp message pops up telling you to add a special character or number? That's form validation"
+
 1. In 1-2 sentences, define end to end testing.
+
+    - End to end testing is the full scope of how a webpage or program is tested - from the initial user input, to server, and back to what the user sees. For example, testing to see if a user can click a button and it gives the appropriate output is an example of end to end testing. The big focus on end to end testing is the user interface. Like all testing concepts in programming, its split up into three A's - Arrange, Act and Assert. Arrange is the starting of a webpage, a form, etc ie does the item even exist? Act is prototyping a user acting on the webpage, app, form etc. ie like clicking a button on the page. Assert is confirming that the users action in the Act step results in the desired output.
 
 ## Instructions
 

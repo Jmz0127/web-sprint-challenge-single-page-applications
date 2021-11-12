@@ -2,18 +2,18 @@ import React from 'react'
 import '../App.css' //only did this so the inputs are more legible and look a little better - personal stretch
 
 const Order = (props) => {
-    console.log(props)
+    
 
-    const {inputChange, formValues, formErrors} = props
+    const {inputChange, formValues, formErrors, orderNow} = props
 
 
     return(
         <div>
             order form for your pizza
-            <form id='pizza-form'>
+            <form id='pizza-form' onSubmit={orderNow}>
                 <label id='name-input'>
                     name: {formErrors.name} 
-                    <input onChange={(e) => inputChange(e.target.name, e.target.value)} type='text' name="name" value={formValues.name} error={formErrors.name}/>
+                    <input onChange={(e) => inputChange(e.target.name, e.target.value)} type='text' name="name" value={formValues.name}/>
                 </label>
                 <label id='size-dropdown'>
                     size: {formErrors.size}
@@ -25,20 +25,20 @@ const Order = (props) => {
                     </select>
                 </label>
                 <label>
-                    topping1:
-                    <input onChange={(e) => inputChange(e.target.name, e.target.value)} type='checkbox' name='topping1' value={formValues.topping1}/>
+                    pepperoni
+                    <input onChange={(e) => inputChange(e.target.name, e.target.checked)} type='checkbox' name='topping1' checked={formValues.topping1}/>
                 </label>
                 <label>
-                    topping2:
-                    <input onChange={(e) => inputChange(e.target.name, e.target.value)} type='checkbox' name='topping2' value={formValues.topping2}/>
+                    jalapenos
+                    <input onChange={(e) => inputChange(e.target.name, e.target.checked)} type='checkbox' name='topping2' checked={formValues.topping2}/>
                 </label>
                 <label>
-                    topping3:
-                    <input onChange={(e) => inputChange(e.target.name, e.target.value)} type='checkbox' name='topping3' value={formValues.topping3}/>
+                    mushrooms
+                    <input onChange={(e) => inputChange(e.target.name, e.target.checked)} type='checkbox' name='topping3' checked={formValues.topping3}/>
                 </label>
                 <label>
-                    topping4:
-                    <input onChange={(e) => inputChange(e.target.name, e.target.value)} type='checkbox' name='topping4' value={formValues.topping4}/>
+                    sausage
+                    <input onChange={(e) => inputChange(e.target.name, e.target.checked)} type='checkbox' name='topping4' checked={formValues.topping4}/>
                 </label>
                 <label id='special-text'>
                     special: 

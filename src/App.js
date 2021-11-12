@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, Switch, Route } from 'react-router-dom';
 import './App.css' //only did this so the links are more legible and look a little better - personal stretch
-import Completion from './components/Completion'; //personal stretch - want to see a completion message post-ordering
 import Order from './components/Order';
 import formSchema from './validation/formSchema';
 import * as yup from 'yup';
+import axios from 'axios';
 
 //initial form values
 const initialOrderForm={ 
@@ -37,6 +37,15 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialOrderFormErrors)
   const [disabled, setDisabled] = useState(true)
 
+  //post the data to the server using axios when the user hits Add to Order
+  const orderNow = (event) => {
+    event.preventDefault()
+    axios.post('https://reqres.in/api/orders', formValues)
+      .then(res => {
+        console.log(res.data)
+      })
+  }
+
   const validate = (name, value) => {
     yup.reach(formSchema, name) //validating the name rules from our formSchema file
       .validate(value)
@@ -44,7 +53,6 @@ const App = () => {
         setFormErrors({...formErrors, [name]:''})
       })
       .catch((error) => {
-        
         setFormErrors({...formErrors, [name]: error.errors[0]})
       })
   }
@@ -72,7 +80,6 @@ const App = () => {
         <nav>
           <Link to='/'>Home</Link>
           <Link id='order-pizza'to='/pizza'>Order Pizza</Link>
-          <Link to='/completion'>Completion</Link>
         </nav>
       </header>
       <main>
@@ -80,11 +87,9 @@ const App = () => {
           <Route exact path='/'>
             <div>home</div>
           </Route>
-          <Route path='/completion'>
-            <Completion pizza={pizza}/>
-          </Route>
           <Route path='/pizza'>
             <Order 
+            orderNow = {orderNow}
             inputChange = {inputChange}
             formValues = {formValues}
             formErrors = {formErrors}

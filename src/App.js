@@ -42,7 +42,8 @@ const App = () => {
     event.preventDefault()
     axios.post('https://reqres.in/api/orders', formValues)
       .then(res => {
-        console.log(res.data)
+        setPizza(pizza)
+        console.log(res.data) //per readme it says to log the data in console.left this console.log in here for that purpose
       })
   }
 
@@ -59,7 +60,6 @@ const App = () => {
 
   const inputChange = (name, value) => {
     validate(name, value)
-    console.log(name, value)
     setFormValues({
       ...formValues, 
       [name]: value
